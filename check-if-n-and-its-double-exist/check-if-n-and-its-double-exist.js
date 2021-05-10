@@ -3,15 +3,13 @@
  * @return {boolean}
  */
 var checkIfExist = function(arr) {
-  const memo = {};
+  for (let i = 0; i <= arr.length - 1; i++) {
+    const targetIndex = arr.indexOf(arr[i] * 2);
 
-  for (const num of arr) {
-    if (memo[num]) {
+    if (targetIndex !== -1 && targetIndex !== i) {
       return true;
     }
 
-    memo[num * 2] = true;
-    memo[num / 2] = true;
   }
 
   return false;
