@@ -3,9 +3,22 @@
  * @return {number[]}
  */
 var squareNum = function(num) {
-    return Math.abs(num) * Math.abs(num);
+    return Math.abs(num) ** 2;
 };
 
 var sortedSquares = function(nums) {
-    return nums.map(squareNum).sort((l, r) => l - r)
+    const result = [];
+    let start = 0;
+    let end = nums.length - 1;
+    let position = nums.length - 1;
+    
+    while (position >= 0) {
+        if (squareNum(nums[start]) < squareNum(nums[end])) {
+            result[position--] = squareNum(nums[end--]);
+        } else {
+            result[position--] = squareNum(nums[start++]);
+        } 
+    }
+    
+    return result;
 };
