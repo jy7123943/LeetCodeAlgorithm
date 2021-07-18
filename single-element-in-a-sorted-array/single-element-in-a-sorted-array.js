@@ -14,12 +14,12 @@ var singleNonDuplicate = function(nums) {
   }
 
   if (nums[mid] === nums[mid + 1]) {
-    const left = nums.slice(0, mid);
-    const right = nums.slice(mid);
-    return singleNonDuplicate(left.length % 2 === 1 ? left : right);
+    return singleNonDuplicate(
+      mid % 2 === 0 ? nums.slice(mid) : nums.slice(0, mid)
+    );
   } else {
-    const left = nums.slice(0, mid + 1);
-    const right = nums.slice(mid + 1);
-    return singleNonDuplicate(left.length % 2 === 1 ? left : right);
+    return singleNonDuplicate(
+      mid % 2 === 0 ? nums.slice(0, mid + 1) : nums.slice(mid + 1)
+    );
   }
 };
