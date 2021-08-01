@@ -25,3 +25,53 @@ var islandPerimeter = function(grid) {
 
   return result;
 };
+
+/**
+ * Solution #2
+
+const countCoastLine = (grid, i, j) => {
+  let count = 0;
+
+  if (!grid[i - 1]?.[j]) count++;
+  if (!grid[i][j - 1]) count++;
+  if (!grid[i + 1]?.[j]) count++;
+  if (!grid[i][j + 1]) count++;
+
+  return count;
+};
+
+var islandPerimeter = function(grid) {
+  let result = 0;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] === 1) {
+        searchLand(grid, i, j);
+        break;
+      }
+    }
+  }
+
+  function searchLand (grid, i, j) {
+    if (grid[i][j] !== 1) return;
+    grid[i][j] *= -1;
+    result += countCoastLine(grid, i, j);
+
+    if (grid[i][j - 1] === 1) {
+      searchLand(grid, i, j - 1);
+    }
+    if (grid[i][j + 1] === 1) {
+      searchLand(grid, i, j + 1);
+    }
+    if (grid[i + 1]?.[j] === 1) {
+      searchLand(grid, i + 1, j);
+    }
+    if (grid[i - 1]?.[j] === 1) {
+      searchLand(grid, i - 1, j);
+    }
+  };
+
+  return result;
+};
+
+ */
