@@ -5,11 +5,10 @@
  */
 var validateStackSequences = function(pushed, popped) {
   const pushList = [...pushed];
-  let count = 0;
   let pushIndex = 0;
   let popIndex = 0;
 
-  while (++count <= (pushed.length * 2)) {
+  for (let i = 0; i < pushed.length * 2; i++) {
     if (pushList[pushIndex] === popped[popIndex]) {
       pushList.splice(pushIndex, 1);
       pushIndex--;
@@ -17,6 +16,8 @@ var validateStackSequences = function(pushed, popped) {
     } else {
       pushIndex++;
     }
+
+    if (pushList.length === 0) return true;
   }
 
   return pushList.length === 0;
