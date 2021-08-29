@@ -6,6 +6,7 @@
  * @return {number[][]}
  */
 
+/*
 var floodFill = function(image, sr, sc, newColor) {
   const prevColor = image[sr][sc];
   const queue = [{sr, sc}];
@@ -26,9 +27,31 @@ var floodFill = function(image, sr, sc, newColor) {
     if (!memo[`${sr},${sc + 1}`] && image[sr][sc + 1] === prevColor) {
       queue.push({sr, sc: sc + 1});
     }
-     if (!memo[`${sr + 1},${sc}`] && image[sr + 1]?.[sc] === prevColor) {
+    if (!memo[`${sr + 1},${sc}`] && image[sr + 1]?.[sc] === prevColor) {
       queue.push({sr: sr + 1, sc});
     }
+  }
+
+  return image;
+};
+*/
+var floodFill = function(image, sr, sc, newColor) {
+  const prevColor = image[sr][sc];
+  if (prevColor === newColor) return image;
+
+  image[sr][sc] = newColor;
+
+  if (image[sr - 1]?.[sc] === prevColor) {
+    floodFill(image, sr - 1, sc, newColor);
+  }
+  if (image[sr][sc - 1] === prevColor) {
+    floodFill(image, sr, sc - 1, newColor);
+  }
+  if (image[sr][sc + 1] === prevColor) {
+    floodFill(image, sr, sc + 1, newColor);
+  }
+  if (image[sr + 1]?.[sc] === prevColor) {
+    floodFill(image, sr + 1, sc, newColor);
   }
 
   return image;
