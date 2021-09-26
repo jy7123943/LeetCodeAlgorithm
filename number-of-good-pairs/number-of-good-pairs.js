@@ -3,8 +3,11 @@
  * @return {number}
  */
 var numIdenticalPairs = function(nums) {
-  const hashTable = nums.reduce((memo, currentValue) => {
+  let result = 0;
+
+  nums.reduce((memo, currentValue) => {
     if (memo[currentValue]) {
+      result += memo[currentValue];
       memo[currentValue]++;
     } else {
       memo[currentValue] = 1;
@@ -12,10 +15,5 @@ var numIdenticalPairs = function(nums) {
     return memo;
   }, {});
 
-  return Object.values(hashTable).reduce((result, currentValue) => {
-    if (currentValue <= 1) return result;
-
-    result += currentValue * (currentValue - 1) / 2;
-    return result;
-  }, 0);
+  return result;
 };
