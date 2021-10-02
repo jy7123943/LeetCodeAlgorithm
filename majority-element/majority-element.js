@@ -3,15 +3,16 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-  const majorityCondition = nums.length / 2;
-  const memo = {};
+  let count = 0;
+  let candidate;
 
   for (let i = 0; i < nums.length; i++) {
-    if (memo[nums[i]]) {
-      memo[nums[i]]++;
-    } else {
-      memo[nums[i]] = 1;
+    if (count === 0) {
+      candidate = nums[i];
     }
-    if (memo[nums[i]] > majorityCondition) return nums[i];
+
+    count += candidate === nums[i] ? 1 : -1;
   }
+
+  return candidate;
 };
