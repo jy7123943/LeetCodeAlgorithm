@@ -5,18 +5,16 @@
 var permute = function(nums) {
   const result = [];
 
-  for (let i = 0; i < nums.length; i++) {
-    getPermutation([nums[i]], [...nums.slice(0, i), ...nums.slice(i + 1)]);
-  }
+  getPermutation([], nums);
 
-  function getPermutation(first, rest) {
-    if (first.length === nums.length) {
-      result.push(first);
+  function getPermutation(permutation, rest) {
+    if (permutation.length === nums.length) {
+      result.push(permutation);
       return;
     }
 
     for (let j = 0; j < rest.length; j++) {
-      getPermutation([...first, rest[j]], [...rest.slice(0, j), ...rest.slice(j + 1)])
+      getPermutation([...permutation, rest[j]], [...rest.slice(0, j), ...rest.slice(j + 1)])
     }
   }
 
