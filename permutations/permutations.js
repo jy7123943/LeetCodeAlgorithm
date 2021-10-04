@@ -9,7 +9,7 @@ var permute = function(nums, permutation = [], result = []) {
   }
 
   const rest = nums.filter(num => !permutation.includes(num));
-  
+
   for (let i = 0; i < rest.length; i++) {
     permute(nums, [...permutation, rest[i]], result);
   }
