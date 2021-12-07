@@ -11,27 +11,27 @@
  * @return {number}
  */
 var deepestLeavesSum = function(root) {
-  let lastLevel = 0;
+  let maxLevel = 0;
   let result = 0;
 
-  function recursive(root, level = 0) {
-    if (level === lastLevel) {
+  function treeTraversal(root, level = 0) {
+    if (level === maxLevel) {
       result += root.val;
     }
-    if (level > lastLevel) {
+    if (level > maxLevel) {
       result = root.val;
-      lastLevel = level;
+      maxLevel = level;
     }
 
     if (root.left) {
-      recursive(root.left, level + 1)
+      treeTraversal(root.left, level + 1)
     }
     if (root.right) {
-      recursive(root.right, level + 1)
+      treeTraversal(root.right, level + 1)
     }
   }
 
-  recursive(root, 0);
+  treeTraversal(root, 0);
 
   return result;
 };
