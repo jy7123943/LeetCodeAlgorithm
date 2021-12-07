@@ -31,7 +31,7 @@ var deepestLeavesSum = function(root) {
     }
   }
 
-  treeTraversal(root, 0);
+  treeTraversal(root);
 
   return result;
 };
