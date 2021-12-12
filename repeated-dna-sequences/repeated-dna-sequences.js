@@ -3,17 +3,20 @@
  * @return {string[]}
  */
 var findRepeatedDnaSequences = function(s) {
-  const result = new Set();
-  const hashtable = new Set();
+  const result = [];
+  const hashtable = {};
   for (let i = 0; i < s.length - 9; i++) {
     const sequences = s.slice(i, i + 10);
+    if (!hashtable[sequences]) {
+      hashtable[sequences] = 1;
+      continue;
+    }
 
-    if (hashtable.has(sequences)) {
-      result.add(sequences);
-    } else {
-      hashtable.add(sequences);
+    if (hashtable[sequences] === 1) {
+      hashtable[sequences] = 2;
+      result.push(sequences);
     }
   }
 
-  return Array.from(result);
+  return result;
 };
