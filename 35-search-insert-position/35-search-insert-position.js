@@ -3,21 +3,22 @@
  * @param {number} target
  * @return {number}
  */
-var searchInsert = function(nums, target, startIndex = 0) {
-  if (nums.length === 0) return startIndex;
-  if (nums.length === 1) {
-    return nums[0] < target ? startIndex + 1 : startIndex;
+var searchInsert = function(nums, target, startIndex = 0, endIndex = nums.length - 1) {
+  if (endIndex - startIndex === -1) return startIndex;
+  if (endIndex - startIndex === 0) {
+    return nums[startIndex] < target ? startIndex + 1 : startIndex;
   }
 
-  const midIndex = Math.floor(nums.length / 2);
+  const midIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
 
-  if (nums[midIndex] === target) return midIndex;
+  console.log(midIndex)
+  if (target === nums[midIndex]) return midIndex;
 
-  if (nums[midIndex] > target) {
-    return searchInsert(nums.slice(0, midIndex), target, startIndex);
+  if (target < nums[midIndex]) {
+    return searchInsert(nums, target, startIndex, midIndex - 1);
   }
 
-  if (nums[midIndex] < target) {
-    return searchInsert(nums.slice(midIndex + 1), target, startIndex + midIndex + 1);
+  if (target > nums[midIndex]) {
+    return searchInsert(nums, target, midIndex + 1, endIndex);
   }
 };
