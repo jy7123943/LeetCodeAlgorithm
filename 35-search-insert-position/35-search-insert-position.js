@@ -11,7 +11,6 @@ var searchInsert = function(nums, target, startIndex = 0, endIndex = nums.length
 
   const midIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
 
-  console.log(midIndex)
   if (target === nums[midIndex]) return midIndex;
 
   if (target < nums[midIndex]) {
