@@ -4,10 +4,7 @@
  * @return {number}
  */
 var searchInsert = function(nums, target, startIndex = 0, endIndex = nums.length - 1) {
-  if (endIndex - startIndex === -1) return startIndex;
-  if (endIndex - startIndex === 0) {
-    return nums[startIndex] < target ? startIndex + 1 : startIndex;
-  }
+  if (startIndex > endIndex) return startIndex;
 
   const midIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
 
