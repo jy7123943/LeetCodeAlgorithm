@@ -6,7 +6,7 @@
 var searchInsert = function(nums, target, startIndex = 0, endIndex = nums.length - 1) {
   if (startIndex > endIndex) return startIndex;
 
-  const midIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
+  const midIndex = Math.floor((startIndex + endIndex) / 2);
 
   if (target === nums[midIndex]) return midIndex;
 
