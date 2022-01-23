@@ -3,52 +3,33 @@
  * @return {number}
  */
 var calculate = function(s) {
-  const operateNumber = (stack, operator, currentNumber) => {
-    const lastNumber = stack.pop();
+  const OPERATOR_REG_EXP = /\+|\-|\*|\//;
+  const NUMBER_REG_EXP = /[0-9|\s]*/;
 
-    if (lastNumber === undefined) {
-      stack.push(currentNumber);
-      return;
-    }
-    switch (operator) {
+  const numbers = s.split(OPERATOR_REG_EXP).map(Number);
+  const operators = s.split(NUMBER_REG_EXP).filter(Boolean);
+
+  if (operators.length === 0) return Number(numbers[0]);
+
+  const stack = [numbers.shift()];
+
+  numbers.forEach((num, i) => {
+    switch (operators[i]) {
       case '+':
-        stack.push(lastNumber);
-        stack.push(currentNumber);
+        stack.push(num);
         break;
       case '-':
-        stack.push(lastNumber);
-        stack.push(-currentNumber);
+        stack.push(-num);
         break;
       case '*':
-        stack.push(lastNumber * currentNumber);
+        stack.push(stack.pop() * num);
         break;
       case '/':
-        const num = lastNumber / currentNumber;
-        stack.push(num < 0 ? -Math.floor(-num) : Math.floor(num));
+        const divided = stack.pop() / num;
+        stack.push(divided < 0 ? -Math.floor(-divided) : Math.floor(divided));
         break;
     }
-  };
-  const OPERATORS = { '+': '+', '-': '-', '*': '*', '/': '/' };
-  let currentNumber = 0;
-  let operator = '+';
+  });
 
-  const list = s.split('').reduce((stack, cv, i) => {
-    if (cv === '') return stack;
-
-    if (OPERATORS[cv]) {
-      operateNumber(stack, operator, currentNumber);
-
-      currentNumber = 0;
-      operator = OPERATORS[cv];
-
-      return stack;
-    }
-
-    currentNumber = Number(currentNumber + cv);
-    return stack;
-  }, []);
-
-  operateNumber(list, operator, currentNumber);
-
-  return list.reduce((acc, num) => acc += num, 0);
+  return stack.reduce((result, n) => result += n, 0);
 };
