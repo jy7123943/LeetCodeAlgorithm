@@ -2,6 +2,11 @@
  * @param {number} num
  * @return {boolean}
  */
+/*
+var isPerfectSquare = function(num) {
+  return (num ** 0.5) % 1 === 0;  // 이렇게 내장 operator 썼다가 답 보고 다시 품...
+};
+*/
 var isPerfectSquare = function(num) {
   if (num === 1) return true;
 
