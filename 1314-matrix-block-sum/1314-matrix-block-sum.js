@@ -8,9 +8,9 @@ var matrixBlockSum = function(mat, k) {
 
   for (let i = 0; i < x; i++) {
     for (let j = 0; j < y; j++) {
-      const left = mat[i][j - 1] || 0;
-      const up = mat[i - 1]?.[j] || 0;
-      const diag = mat[i - 1]?.[j - 1] || 0;
+      const left = mat[i][j - 1] || 0,
+            up = mat[i - 1]?.[j] || 0,
+            diag = mat[i - 1]?.[j - 1] || 0;
       mat[i][j] += up + left - diag;
     }
   }
