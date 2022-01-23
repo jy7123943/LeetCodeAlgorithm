@@ -8,24 +8,24 @@ var calculate = function(s) {
 
     if (lastNumber === undefined) {
       stack.push(currentNumber);
-    } else {
-      switch (operator) {
-        case '+':
-          stack.push(lastNumber);
-          stack.push(currentNumber);
-          break;
-        case '-':
-          stack.push(lastNumber);
-          stack.push(-currentNumber);
-          break;
-        case '*':
-          stack.push(lastNumber * currentNumber);
-          break;
-        case '/':
-          const num = lastNumber / currentNumber;
-          stack.push(num < 0 ? -Math.floor(-num) : Math.floor(num));
-          break;
-      }
+      return;
+    }
+    switch (operator) {
+      case '+':
+        stack.push(lastNumber);
+        stack.push(currentNumber);
+        break;
+      case '-':
+        stack.push(lastNumber);
+        stack.push(-currentNumber);
+        break;
+      case '*':
+        stack.push(lastNumber * currentNumber);
+        break;
+      case '/':
+        const num = lastNumber / currentNumber;
+        stack.push(num < 0 ? -Math.floor(-num) : Math.floor(num));
+        break;
     }
   };
   const OPERATORS = { '+': '+', '-': '-', '*': '*', '/': '/' };
