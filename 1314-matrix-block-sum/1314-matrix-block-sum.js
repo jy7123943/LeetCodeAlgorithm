@@ -4,28 +4,32 @@
  * @return {number[][]}
  */
 var matrixBlockSum = function(mat, k) {
-  const memoSum = {};
-  const sumNumbers = (numbers) => numbers.reduce((sum, n) => sum += n, 0);
+  const x = mat.length, y = mat[0].length;
 
-  const calculate = (rowMin, rowMax, colMin, colMax) => {
-    const key = `${rowMin}${rowMax}${colMin}${colMax}`;
+  for (let i = 0; i < x; i++) {
+    for (let j = 0; j < y; j++) {
+      const left = mat[i][j - 1] || 0;
+      const up = mat[i - 1]?.[j] || 0;
+      const diag = mat[i - 1]?.[j - 1] || 0;
+      mat[i][j] += up + left - diag;
+    }
+  }
 
-    if (memoSum[key]) return memoSum[key];
+  const result = Array.from({ length: x }, () => Array(y));
 
-    memoSum[key] = mat.slice(rowMin, rowMax + 1).reduce((sum, row) => sum += sumNumbers(row.slice(colMin, colMax + 1)), 0);
-    return memoSum[key];
-  };
+  for (let i = 0; i < x; i++) {
+    for (let j = 0; j < y; j++) {
+      const rowMin = Math.max(0, i - k),
+            colMin = Math.max(0, j - k),
+            rowMax = Math.min(x - 1, i + k),
+            colMax = Math.min(y - 1, j + k);
 
-  const maxRowIndex = mat.length - 1;
-  const maxColIndex = mat[0].length - 1;
-  return mat.map((row, rowIndex) => (
-    row.map((col, colIndex) => (
-      calculate(
-        Math.max(rowIndex - k, 0),
-        Math.min(rowIndex + k, maxRowIndex),
-        Math.max(colIndex - k, 0),
-        Math.min(colIndex + k, maxColIndex),
-      )
-    ))
-  ));
+      const left = mat[rowMax][colMin - 1] || 0,
+            up = mat[rowMin - 1]?.[colMax] || 0,
+            diag = mat[rowMin - 1]?.[colMin - 1] || 0;
+
+      result[i][j] = mat[rowMax][colMax] - left - up + diag;
+    }
+  }
+  return result;
 };
