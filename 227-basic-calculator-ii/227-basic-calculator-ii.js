@@ -11,25 +11,24 @@ var calculate = function(s) {
 
   if (operators.length === 0) return Number(numbers[0]);
 
-  const stack = [numbers.shift()];
+  const firstNum = numbers.shift();
 
-  numbers.forEach((num, i) => {
+  return numbers.reduce((stack, n, i) => {
     switch (operators[i]) {
       case '+':
-        stack.push(num);
+        stack.push(n);
         break;
       case '-':
-        stack.push(-num);
+        stack.push(-n);
         break;
       case '*':
-        stack.push(stack.pop() * num);
+        stack.push(stack.pop() * n);
         break;
       case '/':
-        const divided = stack.pop() / num;
+        const divided = stack.pop() / n;
         stack.push(divided < 0 ? Math.ceil(divided) : Math.floor(divided));
         break;
     }
-  });
-
-  return stack.reduce((result, n) => result += n, 0);
+    return stack;
+  }, [firstNum]).reduce((result, n) => result += n, 0);
 };
