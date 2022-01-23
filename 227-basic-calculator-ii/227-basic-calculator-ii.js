@@ -26,7 +26,7 @@ var calculate = function(s) {
         break;
       case '/':
         const divided = stack.pop() / num;
-        stack.push(divided < 0 ? -Math.floor(-divided) : Math.floor(divided));
+        stack.push(divided < 0 ? Math.ceil(divided) : Math.floor(divided));
         break;
     }
   });
