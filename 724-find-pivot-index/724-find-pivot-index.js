@@ -3,13 +3,13 @@
  * @return {number}
  */
 var pivotIndex = function(nums) {
-  const totalSums = nums.reduce((acc, num) => acc += num);
-  const prefixSums = [];
+  const totalSum = nums.reduce((acc, num) => acc += num);
+  let leftSum = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    prefixSums[i] = (prefixSums[i - 1] || 0) + nums[i];
+    leftSum += nums[i];
 
-    if (prefixSums[i] === totalSums - (prefixSums[i - 1] || 0)) {
+    if (leftSum === totalSum - leftSum + nums[i]) {
       return i
     }
   }
