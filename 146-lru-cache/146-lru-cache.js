@@ -8,9 +8,7 @@ var LRUCache = function(capacity) {
   this.LRUKeys = new Set();
 
   this.addLRUKeys = function(key) {
-    if (this.LRUKeys.has(key)) {
-      this.LRUKeys.delete(key);
-    }
+    this.LRUKeys.delete(key);
     this.LRUKeys.add(key);
   };
 
@@ -21,7 +19,7 @@ var LRUCache = function(capacity) {
   }
 };
 
-/** 
+/**
  * @param {number} key
  * @return {number}
  */
@@ -35,7 +33,7 @@ LRUCache.prototype.get = function(key) {
   return value;
 };
 
-/** 
+/**
  * @param {number} key 
  * @param {number} value
  * @return {void}
@@ -55,3 +53,4 @@ LRUCache.prototype.put = function(key, value) {
  * var param_1 = obj.get(key)
  * obj.put(key,value)
  */
+
