@@ -4,7 +4,7 @@ var MyQueue = function() {
   this.stack2 = [];
 };
 
-/** 
+/**
  * @param {number} x
  * @return {void}
  */
@@ -57,7 +57,7 @@ MyQueue.prototype.empty = function() {
   return this.stack1.length === 0 && this.stack2.length === 0;
 };
 
-/** 
+/**
  * Your MyQueue object will be instantiated and called as such:
  * var obj = new MyQueue()
  * obj.push(x)
