@@ -8,7 +8,9 @@ var LRUCache = function(capacity) {
   this.LRUKeys = new Set();
 
   this.addLRUKeys = function(key) {
-    this.LRUKeys.delete(key);
+    if (this.LRUKeys.has(key)) {
+      this.LRUKeys.delete(key);
+    }
     this.LRUKeys.add(key);
   };
 
